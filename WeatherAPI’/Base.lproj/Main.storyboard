@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s18-yU-a31">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="Atl-lu-CTk">
+            <objects>
+                <viewController id="s18-yU-a31" customClass="ViewController" customModule="WeatherAPI_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hfO-6L-Yy2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmf-js-e9k" customClass="ParticlesView" customModule="WeatherAPI_" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="chJ-fC-WaS">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUv-qx-BAx">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="67"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liviv" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFc-Q9-jox">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="67"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                        <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iUC-R1-fVu">
+                                                <rect key="frame" x="0.0" y="77" width="414" height="210.5"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clear-day" translatesAutoresizingMaskIntoConstraints="NO" id="mqQ-8l-fbw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="210.5"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="151" translatesAutoresizingMaskIntoConstraints="NO" id="0Om-r8-Pk9">
+                                                <rect key="frame" x="0.0" y="297.5" width="414" height="60.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="740 mm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smK-gy-ifL" userLabel="pressure Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="131.5" height="60.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3Z-Hi-OuR">
+                                                        <rect key="frame" x="282.5" y="0.0" width="131.5" height="60.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pm6-3d-U2b">
+                                                <rect key="frame" x="0.0" y="368" width="414" height="302.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34˚C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ex-dv-PXE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="302.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                                                        <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a20-JM-pcv">
+                                                <rect key="frame" x="0.0" y="680.5" width="414" height="137.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feer like: 34˚C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SlP-eh-Dcu">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="137.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                        <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="chJ-fC-WaS" firstAttribute="top" secondItem="jmf-js-e9k" secondAttribute="top" id="IYh-90-uim"/>
+                                    <constraint firstItem="chJ-fC-WaS" firstAttribute="leading" secondItem="jmf-js-e9k" secondAttribute="leading" id="man-jd-GGC"/>
+                                    <constraint firstAttribute="trailing" secondItem="chJ-fC-WaS" secondAttribute="trailing" id="ozq-3N-enf"/>
+                                    <constraint firstAttribute="bottom" secondItem="chJ-fC-WaS" secondAttribute="bottom" id="rZc-7I-26f"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="U0h-Ha-Myc"/>
+                        <color key="backgroundColor" red="0.91634660960000003" green="0.83103126289999996" blue="0.54835242029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="U0h-Ha-Myc" firstAttribute="trailing" secondItem="jmf-js-e9k" secondAttribute="trailing" id="3j5-mJ-hi7"/>
+                            <constraint firstItem="U0h-Ha-Myc" firstAttribute="bottom" secondItem="jmf-js-e9k" secondAttribute="bottom" id="F04-du-kZV"/>
+                            <constraint firstItem="jmf-js-e9k" firstAttribute="leading" secondItem="U0h-Ha-Myc" secondAttribute="leading" id="NLz-Dm-wPI"/>
+                            <constraint firstItem="jmf-js-e9k" firstAttribute="top" secondItem="U0h-Ha-Myc" secondAttribute="top" id="wNR-n4-A39"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="feelingTemperature" destination="SlP-eh-Dcu" id="OPO-ID-Lzz"/>
+                        <outlet property="imageWeather" destination="mqQ-8l-fbw" id="YiN-TJ-B5K"/>
+                        <outlet property="locationLabel" destination="OFc-Q9-jox" id="8F4-zD-LLi"/>
+                        <outlet property="rainyLabel" destination="s3Z-Hi-OuR" id="AMN-5a-0a2"/>
+                        <outlet property="temperatureLabel" destination="2ex-dv-PXE" id="vMD-fz-lLq"/>
+                        <outlet property="windyLabel" destination="smK-gy-ifL" id="IMb-l4-8mJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EDT-iN-Bwj" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23.188405797101453" y="67.633928571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="clear-day" width="83" height="83"/>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
