@@ -8,12 +8,12 @@
 import Foundation
 
 struct LocationModel: Decodable {
-    var data: [DataModel]
+    var data: [WeatherModel]
     var city_name: String
-    var lon: Double
-    var timezone: String
-    var lat: Double
-    var country_code: String
+//    var lon: Double
+//    var timezone: String
+//    var lat: Double
+//    var country_code: String
     
 }
 
