@@ -11,7 +11,6 @@ import CoreLocation
 class ViewController: UIViewController {
     
     let locationManager = CLLocationManager()
-    var location = "lat=49.8382600&lon=24.0232400"
     
     //MARK: @IBOutlet
     @IBOutlet weak var locationLabel: UILabel!
@@ -29,7 +28,7 @@ class ViewController: UIViewController {
     }
     
     func weatherToday() {
-        WeatherNetwork.fetchWeather(location: location) { [unowned self] data in
+        WeatherNetwork.fetchWeather(location: Location.location) { [unowned self] data in
             guard let weatherModel = data?.data[0] else { return }
             locationLabel.text = data?.city_name
             descriptionLabel.text = weatherModel.weather.description
@@ -57,7 +56,7 @@ class ViewController: UIViewController {
         let actionCancel = UIAlertAction(title: "Відмінити!", style: .cancel)
         let actionDali = UIAlertAction(title: "Далі", style: .default) { [unowned self] action in
             guard let text = alertController.textFields?.first?.text else { return }
-            location = "city=\(text)"
+            Location.location = "city=\(text)"
             weatherToday()
         }
         alertController.addTextField(configurationHandler: nil)
@@ -70,14 +69,13 @@ class ViewController: UIViewController {
     @IBAction func addCity(_ sender: Any) {
         createAlert()
     }
-    
 }
 
 extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lastLocation = locations.first {
-            location = "lat=\(lastLocation.coordinate.latitude)&lon=\(lastLocation.coordinate.longitude)"
+            Location.location = "lat=\(lastLocation.coordinate.latitude)&lon=\(lastLocation.coordinate.longitude)"
             weatherToday()
         }
     }

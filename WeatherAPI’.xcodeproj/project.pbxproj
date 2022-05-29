@@ -19,6 +19,7 @@
 		9521EDB4283ECA1000B9FD2E /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521EDB3283ECA1000B9FD2E /* WeatherIcon.swift */; };
 		95D6F8BE2842805F00AEE7FF /* WeatherTabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6F8BD2842805F00AEE7FF /* WeatherTabelView.swift */; };
 		95D6F8C02842814800AEE7FF /* CastomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6F8BF2842814800AEE7FF /* CastomCell.swift */; };
+		95D6F8C22842A1F100AEE7FF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6F8C12842A1F100AEE7FF /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		9521EDB3283ECA1000B9FD2E /* WeatherIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
 		95D6F8BD2842805F00AEE7FF /* WeatherTabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTabelView.swift; sourceTree = "<group>"; };
 		95D6F8BF2842814800AEE7FF /* CastomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastomCell.swift; sourceTree = "<group>"; };
+		95D6F8C12842A1F100AEE7FF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				9521EDAF283EC50A00B9FD2E /* LocationModel.swift */,
 				9521EDB1283EC69400B9FD2E /* WeatherModel.swift */,
 				9521EDB3283ECA1000B9FD2E /* WeatherIcon.swift */,
+				95D6F8C12842A1F100AEE7FF /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			files = (
 				9521EDAE283E712A00B9FD2E /* WeatherNetwork.swift in Sources */,
 				9521EDB4283ECA1000B9FD2E /* WeatherIcon.swift in Sources */,
+				95D6F8C22842A1F100AEE7FF /* Location.swift in Sources */,
 				9521ED97283E6C9D00B9FD2E /* ViewController.swift in Sources */,
 				9521ED93283E6C9D00B9FD2E /* AppDelegate.swift in Sources */,
 				95D6F8C02842814800AEE7FF /* CastomCell.swift in Sources */,
