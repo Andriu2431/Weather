@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherTabelView: UITableViewController {
     
-    var locatinModel: LocationModel?
+    var locationModel: LocationModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class WeatherTabelView: UITableViewController {
     
     func API() {
         WeatherNetwork.fetchWeather(location: Location.location) {  data in
-            self.locatinModel = data
+            self.locationModel = data
             self.tableView.reloadData()
         }
     }
@@ -29,7 +29,7 @@ class WeatherTabelView: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CastomCell
-        guard let weatherModel = locatinModel?.data[indexPath.row+1] else { return cell}
+        guard let weatherModel = locationModel?.data[indexPath.row+1] else { return cell}
         cell.dataLabel.text = weatherModel.valid_date
         cell.tempLabel.text = "Temp:\(weatherModel.temp)˚C"
         cell.rainyLabel.text = "Rain:\(weatherModel.pop)%"
@@ -38,7 +38,7 @@ class WeatherTabelView: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ((locatinModel?.data.count ?? 0)-1)
+        return ((locationModel?.data.count ?? 0)-1)
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -8,5 +8,5 @@
 import Foundation
 
 class Location {
-   static var location = "lat=49.8382600&lon=24.0232400"
+   static var location = "city=Lviv"
 }
