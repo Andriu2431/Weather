@@ -9,7 +9,7 @@ import Foundation
 
 class WeatherNetwork {
     
-    static let weatherAPIKey = "e52288a13981475ab48fd3acdd970940"
+    static let weatherAPIKey = "fcf64b6e457c4425aa4585dea5ea415c"
     static let weatherHost = "https:api.weatherbit.io"
     
     static func fetchWeather(location: String, complititon: @escaping (LocationModel?) -> ()) {
@@ -30,5 +30,6 @@ class WeatherNetwork {
     }
 }
 
-//"https://api.weatherbit.io/v2.0/forecast/daily?&lat=49.8382600&lon=24.0232400&key=e52288a13981475ab48fd3acdd970940"
+//ToDo: read about query param, URLComponents, URLQueryItem, Define two ways of fetching data from server: by coordinates or by city name
+//"https://api.weatherbit.io/v2.0/forecast/daily?&lat=49.8382600&lon=24.0232400&key=fcf64b6e457c4425aa4585dea5ea415c"
 
