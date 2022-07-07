@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import CoreLocation
 
 class Location {
-   static var location = "city=Lviv"
+    
+    static let shared = Location()
+    
+    var coordinate: CLLocation?
+    var city = ""
 }

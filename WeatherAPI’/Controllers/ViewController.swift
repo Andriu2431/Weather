@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     var locationModel: LocationModel?
+    let request = Requests()
+    var location = Location.shared
     
     //MARK: @IBOutlet
     @IBOutlet weak var locationLabel: UILabel!
@@ -24,18 +26,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestJson()
         startLocationManager()
     }
     
-    func requestJson() {
-        WeatherNetwork.fetchWeather(location: Location.location) { data in
+    func setWetherByCoordinate() {
+        request.getWetherByCoordinate(location.coordinate!) { data in
             self.locationModel = data
-            self.weatherUIToday()
+            self.appdateUI()
         }
     }
     
-    func weatherUIToday() {
+    func setWetherByCity() {
+        request.getWetherByCity(location.city) { data in
+            self.locationModel = data
+            self.appdateUI()
+        }
+    }
+    
+    func appdateUI() {
         guard let weatherModel = locationModel?.data[0] else { return }
         locationLabel.text = locationModel?.city_name
         descriptionLabel.text = weatherModel.weather.description
@@ -60,14 +68,16 @@ class ViewController: UIViewController {
     func createAlert() {
         let alertController = UIAlertController(title: "Впишіть своє місто по англійськи!", message: nil, preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: "Відмінити!", style: .cancel)
-        let actionDali = UIAlertAction(title: "Далі", style: .default) { [unowned self] action in
+        let actionNext = UIAlertAction(title: "Далі", style: .default) { [unowned self] action in
             guard let text = alertController.textFields?.first?.text else { return }
-            Location.location = "city=\(text)"
-            requestJson()
+            location.city = text
+            location.coordinate = nil
+            setWetherByCity()
         }
+        
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(actionCancel)
-        alertController.addAction(actionDali)
+        alertController.addAction(actionNext)
         self.present(alertController, animated: true)
     }
     
@@ -81,8 +91,8 @@ extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lastLocation = locations.first {
-            Location.location = "lat=\(lastLocation.coordinate.latitude)&lon=\(lastLocation.coordinate.longitude)"
-            requestJson()
+            location.coordinate = lastLocation
+            setWetherByCoordinate()
         }
     }
 }
