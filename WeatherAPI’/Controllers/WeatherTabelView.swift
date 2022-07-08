@@ -20,17 +20,11 @@ class WeatherTabelView: UITableViewController {
     }
     
     func setWeatherFor16Day() {
+        guard let coordinate = location.coordinate else { return print("No coordinates")}
         
-        if location.coordinate != nil {
-            request.getWetherByCoordinate(location.coordinate!) { data in
-                self.locationModel = data
-                self.tableView.reloadData()
-            }
-        } else {
-            request.getWetherByCity(location.city) { data in
-                self.locationModel = data
-                self.tableView.reloadData()
-            }
+        request.getWetherByCoordinate(coordinate) { data in
+            self.locationModel = data
+            self.tableView.reloadData()
         }
     }
 

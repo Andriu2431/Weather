@@ -30,14 +30,9 @@ class ViewController: UIViewController {
     }
     
     func setWetherByCoordinate() {
-        request.getWetherByCoordinate(location.coordinate!) { data in
-            self.locationModel = data
-            self.appdateUI()
-        }
-    }
-    
-    func setWetherByCity() {
-        request.getWetherByCity(location.city) { data in
+        guard let coordinate = location.coordinate else { return print("No coordinates")}
+        
+        request.getWetherByCoordinate(coordinate) { data in
             self.locationModel = data
             self.appdateUI()
         }
@@ -45,6 +40,7 @@ class ViewController: UIViewController {
     
     func appdateUI() {
         guard let weatherModel = locationModel?.data[0] else { return }
+        
         locationLabel.text = locationModel?.city_name
         descriptionLabel.text = weatherModel.weather.description
         imageWeather.image = UIImage(named: "\(weatherModel.weather.code)")
@@ -70,15 +66,31 @@ class ViewController: UIViewController {
         let actionCancel = UIAlertAction(title: "Відмінити!", style: .cancel)
         let actionNext = UIAlertAction(title: "Далі", style: .default) { [unowned self] action in
             guard let text = alertController.textFields?.first?.text else { return }
-            location.city = text
-            location.coordinate = nil
-            setWetherByCity()
+            
+            geocoder(city: text)
         }
         
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(actionCancel)
         alertController.addAction(actionNext)
+        
         self.present(alertController, animated: true)
+    }
+    
+    func geocoder(city: String) {
+        let geocoder = CLGeocoder()
+        
+        geocoder.geocodeAddressString(city) { [unowned self ] placemarks, error in
+            
+            if let error = error {
+                print("Error", error)
+            }
+            
+            let placemark = placemarks?.first
+            
+            self.location.coordinate = placemark?.location
+            setWetherByCoordinate()
+        }
     }
     
     //MARK: @IBAction
@@ -90,6 +102,7 @@ class ViewController: UIViewController {
 extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         if let lastLocation = locations.first {
             location.coordinate = lastLocation
             setWetherByCoordinate()

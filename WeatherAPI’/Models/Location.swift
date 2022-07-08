@@ -13,5 +13,4 @@ class Location {
     static let shared = Location()
     
     var coordinate: CLLocation?
-    var city = ""
 }
