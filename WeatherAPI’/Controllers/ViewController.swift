@@ -61,13 +61,18 @@ class ViewController: UIViewController {
         }
     }
     
+
+    
     func createAlert() {
-        let alertController = UIAlertController(title: "Впишіть своє місто по англійськи!", message: nil, preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: "Відмінити!", style: .cancel)
-        let actionNext = UIAlertAction(title: "Далі", style: .default) { [unowned self] action in
+        let alertController = UIAlertController(title: "Enter your city in English!", message: nil, preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: "Cancel!", style: .cancel)
+        let actionNext = UIAlertAction(title: "Next", style: .default) { [unowned self] action in
             guard let text = alertController.textFields?.first?.text else { return }
             
-            geocoder(city: text)
+            geocoder(city: text) { [unowned self] placemark in
+                self.location.coordinate = placemark?.location
+                self.setWetherByCoordinate()
+            }
         }
         
         alertController.addTextField(configurationHandler: nil)
@@ -77,19 +82,17 @@ class ViewController: UIViewController {
         self.present(alertController, animated: true)
     }
     
-    func geocoder(city: String) {
+    func geocoder(city: String, complititon: @escaping (CLPlacemark?) -> ()) {
         let geocoder = CLGeocoder()
         
-        geocoder.geocodeAddressString(city) { [unowned self ] placemarks, error in
+        geocoder.geocodeAddressString(city) { placemarks, error in
             
             if let error = error {
                 print("Error", error)
             }
             
             let placemark = placemarks?.first
-            
-            self.location.coordinate = placemark?.location
-            setWetherByCoordinate()
+            complititon(placemark)
         }
     }
     
