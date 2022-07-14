@@ -10,11 +10,6 @@ import CoreLocation
 
 class ViewController: UIViewController {
     
-    let locationManager = CLLocationManager()
-    var locationModel: LocationModel?
-    let request = Requests()
-    var location = Location.shared
-    
     //MARK: @IBOutlet
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -24,10 +19,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var feelingTemperature: UILabel!
     
+    private let locationManager = CLLocationManager()
+    private var locationModel: LocationModel?
+    private let request = Requests()
+    private var location = Location.shared
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startLocationManager()
+        
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search city"
+        navigationItem.searchController = searchController
     }
+    
     
     func setWetherByCoordinate() {
         guard let coordinate = location.coordinate else { return print("No coordinates")}
@@ -61,27 +67,6 @@ class ViewController: UIViewController {
         }
     }
     
-
-    
-    func createAlert() {
-        let alertController = UIAlertController(title: "Enter your city in English!", message: nil, preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: "Cancel!", style: .cancel)
-        let actionNext = UIAlertAction(title: "Next", style: .default) { [unowned self] action in
-            guard let text = alertController.textFields?.first?.text else { return }
-            
-            geocoder(city: text) { [unowned self] placemark in
-                self.location.coordinate = placemark?.location
-                self.setWetherByCoordinate()
-            }
-        }
-        
-        alertController.addTextField(configurationHandler: nil)
-        alertController.addAction(actionCancel)
-        alertController.addAction(actionNext)
-        
-        self.present(alertController, animated: true)
-    }
-    
     func geocoder(city: String, complititon: @escaping (CLPlacemark?) -> ()) {
         let geocoder = CLGeocoder()
         
@@ -95,11 +80,6 @@ class ViewController: UIViewController {
             complititon(placemark)
         }
     }
-    
-    //MARK: @IBAction
-    @IBAction func addCity(_ sender: Any) {
-        createAlert()
-    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -110,5 +90,20 @@ extension ViewController: CLLocationManagerDelegate {
             location.coordinate = lastLocation
             setWetherByCoordinate()
         }
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        guard let searchTextFieldString = searchController.searchBar.searchTextField.text else { return }
+        
+        geocoder(city: searchTextFieldString) { [unowned self] placemark in
+            self.location.coordinate = placemark?.location
+            self.setWetherByCoordinate()
+        }
+        
+        searchController.isActive = false
     }
 }

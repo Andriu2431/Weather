@@ -9,12 +9,15 @@ import UIKit
 
 class WeatherTabelView: UITableViewController {
     
-    var locationModel: LocationModel?
-    let request = Requests()
-    let location = Location.shared
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    private var locationModel: LocationModel?
+    private let request = Requests()
+    private let location = Location.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
         tableView.allowsSelection = false
         setWeatherFor16Day()
     }
@@ -24,6 +27,8 @@ class WeatherTabelView: UITableViewController {
         
         request.getWetherByCoordinate(coordinate) { data in
             self.locationModel = data
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
             self.tableView.reloadData()
         }
     }
