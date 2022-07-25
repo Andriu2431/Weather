@@ -9,17 +9,26 @@ import UIKit
 
 class WeatherTabelView: UITableViewController {
     
-    var locationModel: LocationModel?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    private var locationModel: LocationModel?
+    private let request = Requests()
+    private let location = Location.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
         tableView.allowsSelection = false
-        API()
+        setWeatherFor16Day()
     }
     
-    func API() {
-        WeatherNetwork.fetchWeather(location: Location.location) {  data in
+    func setWeatherFor16Day() {
+        guard let coordinate = location.coordinate else { return print("No coordinates")}
+        
+        request.getWetherByCoordinate(coordinate) { data in
             self.locationModel = data
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
             self.tableView.reloadData()
         }
     }
@@ -29,7 +38,7 @@ class WeatherTabelView: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CastomCell
-        guard let weatherModel = locationModel?.data[indexPath.row+1] else { return cell}
+        guard let weatherModel = locationModel?.data[indexPath.row] else { return cell}
         cell.dataLabel.text = weatherModel.valid_date
         cell.tempLabel.text = "Temp:\(weatherModel.temp)˚C"
         cell.rainyLabel.text = "Rain:\(weatherModel.pop)%"
@@ -38,7 +47,7 @@ class WeatherTabelView: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ((locationModel?.data.count ?? 0)-1)
+        return ((locationModel?.data.count ?? 0))
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
